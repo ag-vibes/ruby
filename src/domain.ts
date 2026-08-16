@@ -1,6 +1,6 @@
 export type Indicator = { id: string; name: string; unit: string; order: number; showOnHome: boolean };
 export type Result = { id: string; indicatorId: string; date: string; value: number };
-export type Course = { id: string; indicatorId: string; startDate: string; plannedEndDate?: string; actualEndDate?: string; days?: number };
+export type Course = { id: string; indicatorIds: string[]; startDate: string; plannedEndDate?: string; actualEndDate?: string; days?: number };
 export type AppData = { version: 1; indicators: Indicator[]; results: Result[]; courses: Course[]; lastBackupDate?: string };
 
 export const uid = () => crypto.randomUUID?.() ?? `${Date.now()}-${Math.random()}`;
@@ -20,7 +20,12 @@ export const normalizeData = (value: unknown): AppData => {
     version: 1,
     indicators: Array.isArray(data.indicators) ? data.indicators : initialIndicators.map((x) => ({ ...x })),
     results: Array.isArray(data.results) ? data.results.filter((x) => Number.isFinite(x.value)) : [],
-    courses: Array.isArray(data.courses) ? data.courses : [],
+    courses: Array.isArray(data.courses) ? data.courses.map((course) => {
+      const legacy = course as Course & { indicatorId?: string };
+      const indicatorIds = Array.isArray(legacy.indicatorIds) ? legacy.indicatorIds : legacy.indicatorId ? [legacy.indicatorId] : [];
+      const { indicatorId: _legacyIndicatorId, ...rest } = legacy;
+      return { ...rest, indicatorIds };
+    }) : [],
     lastBackupDate: data.lastBackupDate,
   };
 };
