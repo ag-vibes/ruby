@@ -36,6 +36,13 @@ export const trendDirection = (from: number, to: number, threshold = 0.15) => {
   const change = (to - from) / Math.abs(from);
   return change > threshold ? "up" : change < -threshold ? "down" : "steady";
 };
+export const positionInMonthGrid = (date: string, gridStart: Date, monthCount: number) => {
+  const value = new Date(`${date}T00:00:00`);
+  const monthIndex = (value.getFullYear() - gridStart.getFullYear()) * 12 + value.getMonth() - gridStart.getMonth();
+  const daysInMonth = new Date(value.getFullYear(), value.getMonth() + 1, 0).getDate();
+  const position = (monthIndex + (value.getDate() - 1) / daysInMonth) / monthCount * 100;
+  return Math.max(0, Math.min(100, position));
+};
 export const addDays = (date: string, days: number) => {
   const value = new Date(`${date}T12:00:00`);
   value.setDate(value.getDate() + days);
