@@ -42,7 +42,7 @@ form,.form { display:grid; gap:15px; }
 .field { display:grid; gap:7px; font-size:13px; font-weight:400; color:var(--muted); }
 .field > span { font-weight:400; }
 .field small { font-weight:400; color:#9c9188; }
-input,select { width:100%; min-width:0; max-width:100%; background:#fff; border:1px solid rgba(46,40,48,.16); border-radius:12px; padding:13px; color:var(--ink); font-weight:400; text-align:left; }
+input,select { width:100%; min-width:0; max-width:100%; background:#fff; border:1px solid rgba(46,40,48,.16); border-radius:12px; padding:13px; color:var(--ink); font-size:16px; font-weight:400; text-align:left; }
 input::placeholder { color:#9c9188; font-weight:400; opacity:1; }
 .date-input { position:relative; min-width:0; max-width:100%; }
 .date-input > input:first-child { padding-right:52px; }
@@ -55,7 +55,8 @@ input::placeholder { color:#9c9188; font-weight:400; opacity:1; }
 .date-picker-native::-webkit-calendar-picker-indicator { position:absolute; inset:0; width:100%; height:100%; margin:0; padding:0; opacity:0; cursor:pointer; }
 select { appearance:auto; -webkit-appearance:menulist; }
 .result-row { display:grid; grid-template-columns:minmax(0,1fr); gap:15px; align-items:end; min-width:0; }
-.result-row .remove-row { justify-self:end; height:32px; font-size:22px; padding:0 4px; }
+.result-row .remove-row { justify-self:start; display:inline-flex; align-items:center; gap:7px; height:32px; padding:0; color:var(--grey); font-size:13px; font-weight:400; }
+.result-row .remove-row b { font-size:21px; line-height:1; font-weight:400; }
 .text-button,.danger-link { border:0; background:transparent; text-align:left; padding:3px 0; color:var(--blue); font-weight:700; } .danger-link { color:var(--ruby); text-align:center; padding:9px; }
 .error { color:var(--ruby); font-size:13px; margin:0; } .or { text-align:center; color:var(--muted); font-size:12px; margin:-7px 0; }
 .backup { display:grid; gap:12px; } .backup p { color:var(--muted); font-size:13px; margin:0 0 8px; } .loading { min-height:100dvh; display:grid; place-items:center; color:var(--muted); }
