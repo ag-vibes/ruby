@@ -38,7 +38,7 @@ export function App() {
 
 function Home({ data, onResults, onCourse }: { data: AppData; onResults: () => void; onCourse: () => void }) {
   const indicators = sortedIndicators(data).filter((x) => x.showOnHome);
-  return <><section className="intro"><h1>динамика показателей</h1><p>результаты анализов и курсы приёма препаратов в одном месте</p></section><div className="actions"><button className="primary" onClick={onResults}>добавить результаты</button><button className="secondary" onClick={onCourse}>отметить курс</button></div>
+  return <><section className="intro"><h1>динамика показателей</h1><p>результаты анализов и курсы приёма препаратов в&nbsp;одном месте</p></section><div className="actions"><button className="primary" onClick={onResults}>добавить результаты</button><button className="secondary" onClick={onCourse}>отметить курс</button></div>
     {indicators.map((indicator) => <Chart key={indicator.id} indicator={indicator} results={data.results.filter((x) => x.indicatorId === indicator.id)} courses={data.courses.filter((x) => x.indicatorId === indicator.id)} />)}
   </>;
 }
