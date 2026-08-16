@@ -31,6 +31,11 @@ export const validBackup = (value: unknown) => {
 };
 export const parseDecimal = (value: string) => Number(value.trim().replace(/\s/g, "").replace(",", "."));
 export const formatDecimal = (value: number) => new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 4 }).format(value);
+export const trendDirection = (from: number, to: number, threshold = 0.15) => {
+  if (from === 0) return to === 0 ? "steady" : to > 0 ? "up" : "down";
+  const change = (to - from) / Math.abs(from);
+  return change > threshold ? "up" : change < -threshold ? "down" : "steady";
+};
 export const addDays = (date: string, days: number) => {
   const value = new Date(`${date}T12:00:00`);
   value.setDate(value.getDate() + days);
